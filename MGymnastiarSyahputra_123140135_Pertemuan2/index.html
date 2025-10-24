@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Personal Dashboard</h1>
+        
+        <div class="dashboard">
+            <!-- Clock & Date Card -->
+            <div class="card">
+                <h2>🕐 Waktu & Tanggal</h2>
+                <div class="clock" id="clock">00:00:00</div>
+                <div class="date" id="date">Loading...</div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="card">
+                <h2>👤 Profil Saya</h2>
+                <div class="info-item">
+                    <span class="info-label">Nama:</span>
+                    <span class="info-value" id="profileName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="profileEmail">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Lokasi:</span>
+                    <span class="info-value" id="profileLocation">-</span>
+                </div>
+                <button class="btn" onclick="dashboard.showProfileForm()">Edit Profil</button>
+            </div>
+
+            <!-- Weather Card -->
+            <div class="card">
+                <h2>🌤️ Cuaca</h2>
+                <div class="weather-info">
+                    <div class="temperature" id="temperature">--°C</div>
+                    <div id="weatherDesc">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <!-- Task Manager -->
+            <div class="card">
+                <h2>✅ Daftar Tugas</h2>
+                <div class="form-group">
+                    <input type="text" id="taskInput" placeholder="Masukkan tugas baru...">
+                    <button class="btn" onclick="dashboard.addTask()">Tambah Tugas</button>
+                </div>
+                <ul class="task-list" id="taskList"></ul>
+            </div>
+
+            <!-- Notes -->
+            <div class="card">
+                <h2>📝 Catatan</h2>
+                <div class="form-group">
+                    <input type="text" id="noteTitle" placeholder="Judul catatan...">
+                    <textarea id="noteContent" placeholder="Isi catatan..."></textarea>
+                    <button class="btn" onclick="dashboard.addNote()">Simpan Catatan</button>
+                </div>
+                <div class="note-list" id="noteList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
