@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: API Manajemen Matakuliah
+  version: "1.0.0"
+  description: |
+    API sederhana untuk manajemen data matakuliah.
+    Dibuat menggunakan Python Pyramid + SQLAlchemy.
+
+servers:
+  - url: http://127.0.0.1:6543
+    description: Local development server
+
+paths:
+  /api/matakuliah:
+    get:
+      summary: Mendapatkan semua matakuliah
+      tags: [Matakuliah]
+      responses:
+        "200":
+          description: Daftar semua matakuliah
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Matakuliah'
+    post:
+      summary: Menambahkan matakuliah baru
+      tags: [Matakuliah]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatakuliahCreate'
+      responses:
+        "201":
+          description: Matakuliah berhasil dibuat
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matakuliah'
+        "400":
+          description: Request tidak valid
+
+  /api/matakuliah/{id}:
+    get:
+      summary: Mendapatkan detail satu matakuliah
+      tags: [Matakuliah]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Detail matakuliah
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matakuliah'
+        "404":
+          description: Matakuliah tidak ditemukan
+
+    put:
+      summary: Mengupdate data matakuliah
+      tags: [Matakuliah]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MatakuliahUpdate'
+      responses:
+        "200":
+          description: Matakuliah berhasil diupdate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matakuliah'
+        "400":
+          description: Request tidak valid
+        "404":
+          description: Matakuliah tidak ditemukan
+
+    delete:
+      summary: Menghapus matakuliah
+      tags: [Matakuliah]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Matakuliah berhasil dihapus
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "404":
+          description: Matakuliah tidak ditemukan
+
+components:
+  schemas:
+    Matakuliah:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        kode_mk:
+          type: string
+          example: IF101
+        nama_mk:
+          type: string
+          example: Pengantar Informatika
+        sks:
+          type: integer
+          example: 3
+        semester:
+          type: integer
+          example: 1
+
+    MatakuliahCreate:
+      type: object
+      required: [kode_mk, nama_mk, sks, semester]
+      properties:
+        kode_mk:
+          type: string
+          example: IF101
+        nama_mk:
+          type: string
+          example: Pengantar Informatika
+        sks:
+          type: integer
+          example: 3
+        semester:
+          type: integer
+          example: 1
+
+    MatakuliahUpdate:
+      type: object
+      properties:
+        kode_mk:
+          type: string
+          example: IF101
+        nama_mk:
+          type: string
+          example: Pengantar Informatika Lanjut
+        sks:
+          type: integer
+          example: 4
+        semester:
+          type: integer
+          example: 2
